@@ -13,3 +13,5 @@ We also include code (`py/sample_posterior_distribution_no_threshold.ipynb`) for
 If you use data from this paper, please abide by FlyWire citation guidelines and cite the relevant [primary resources]{https://codex.flywire.ai/about_flywire}. Additionally, please cite our paper:
 
 Betzel, R., Del Rio, O., Labora, N., Dvali, S., Larsen, B., Lynn, C. W., ... & Seguin, C. (2025). Hierarchical Community Structure of the Adult Drosophila Connectome Reveals Conserved Circuit Archetypes. bioRxiv, 2025-12.
+
+All code and data are provided as is. If you have specific questions, please reach out to Rick Betzel (rbetzel@umn.edu).
