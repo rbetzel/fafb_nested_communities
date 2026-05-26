@@ -122,58 +122,60 @@ niterconsensus = 100;
 ndims = size(feat_lodim,2);
 
 gmmdir = fullfile('..','outputs',sprintf('gmm_varexp=%.4f',varexp));
-if ~exist(gmmdir,'dir'); mkdir(gmmdir); end
-%%
 
-aic = nan(niter,kmax);
-bic = aic;
-% for k = 2:kmax
-save(fullfile(gmmdir,'data_no_nts.mat'),'feat_lodim','drop','ndims','maxIter','varexp');
-for k = 2:kmax
-    mdl = cell(niter,1);
-    gmmfilename = fullfile(gmmdir,sprintf('k=%1.4i.data_no_nts.mat',k));
-    check = dir(gmmfilename);
-    if isempty(check)
-        pi_k = zeros(k,niter,'single');
-        mu_k = zeros(k,ndims,niter,'single');
-        Sigma_k = mu_k;
-        logL = cell(niter,1);
-        clu = zeros(sum(~drop),niter,'single');
-        resp = zeros(sum(~drop),k,niter,'single');
-        AIC = zeros(niter,1,'single');
-        BIC = AIC;
-        parfor iter = 1:niter
-            disp([k,iter]);
-            [~, warnid] = lastwarn;
-            warning('off', warnid);
-            [pi_k(:,iter), mu_k(:,:,iter), Sigma_k(:,:,iter), logL{iter}, clu(:,iter), resp(:,:,iter), AIC(iter), BIC(iter)] = fcn_gmm_fit(feat_lodim,k,maxIter);
-        end
-        save(gmmfilename,'pi_k','mu_k','Sigma_k','logL','clu','resp','AIC','BIC');
-    else
-        load(gmmfilename,'BIC','AIC')
-    end
-    aic(:,k) = AIC;
-    bic(:,k) = BIC;
-
-end
-
-aic_m = nanmean(aic,1);
-bic_m = nanmean(bic,1);
-
-aic_s = nanstd(aic,[],1);
-bic_s = nanstd(bic,[],1);
-
-[~,aic_min] = min(aic_m);
-[~,bic_min] = min(bic_m);
-
-aic_prct = prctile(aic(~isnan(aic)),cutoff);
-bic_prct = prctile(bic(~isnan(bic)),cutoff);
-
-aic_count = sum(aic <= aic_prct,1);
-bic_count = sum(bic <= bic_prct,1);
-
-[r,c] = find(bic <= bic_prct);
-ind = sub2ind(size(bic),r,c);
+% UNCOMMENT THIS IF YOU WANT TO FIT GMMs YOURSELF
+% % if ~exist(gmmdir,'dir'); mkdir(gmmdir); end
+% % %%
+% % 
+% % aic = nan(niter,kmax);
+% % bic = aic;
+% % % for k = 2:kmax
+% % save(fullfile(gmmdir,'data_no_nts.mat'),'feat_lodim','drop','ndims','maxIter','varexp');
+% % for k = 2:kmax
+% %     mdl = cell(niter,1);
+% %     gmmfilename = fullfile(gmmdir,sprintf('k=%1.4i.data_no_nts.mat',k));
+% %     check = dir(gmmfilename);
+% %     if isempty(check)
+% %         pi_k = zeros(k,niter,'single');
+% %         mu_k = zeros(k,ndims,niter,'single');
+% %         Sigma_k = mu_k;
+% %         logL = cell(niter,1);
+% %         clu = zeros(sum(~drop),niter,'single');
+% %         resp = zeros(sum(~drop),k,niter,'single');
+% %         AIC = zeros(niter,1,'single');
+% %         BIC = AIC;
+% %         parfor iter = 1:niter
+% %             disp([k,iter]);
+% %             [~, warnid] = lastwarn;
+% %             warning('off', warnid);
+% %             [pi_k(:,iter), mu_k(:,:,iter), Sigma_k(:,:,iter), logL{iter}, clu(:,iter), resp(:,:,iter), AIC(iter), BIC(iter)] = fcn_gmm_fit(feat_lodim,k,maxIter);
+% %         end
+% %         save(gmmfilename,'pi_k','mu_k','Sigma_k','logL','clu','resp','AIC','BIC');
+% %     else
+% %         load(gmmfilename,'BIC','AIC')
+% %     end
+% %     aic(:,k) = AIC;
+% %     bic(:,k) = BIC;
+% % 
+% % end
+% % 
+% % aic_m = nanmean(aic,1);
+% % bic_m = nanmean(bic,1);
+% % 
+% % aic_s = nanstd(aic,[],1);
+% % bic_s = nanstd(bic,[],1);
+% % 
+% % [~,aic_min] = min(aic_m);
+% % [~,bic_min] = min(bic_m);
+% % 
+% % aic_prct = prctile(aic(~isnan(aic)),cutoff);
+% % bic_prct = prctile(bic(~isnan(bic)),cutoff);
+% % 
+% % aic_count = sum(aic <= aic_prct,1);
+% % bic_count = sum(bic <= bic_prct,1);
+% % 
+% % [r,c] = find(bic <= bic_prct);
+% % ind = sub2ind(size(bic),r,c);
 
 consensusfilename = fullfile(gmmdir,sprintf('consensus.data_no_nts.bic=%0.4f.mat',cutoff));
 check = dir(consensusfilename);
