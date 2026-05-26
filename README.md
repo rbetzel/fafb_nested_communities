@@ -1,3 +1,5 @@
+![](schematic.png)
+
 # Overview
 This repository contains code and data for generating the primary results from "Hierarchical Community Structure of the Adult Drosophila Connectome Reveals Conserved Circuit Archetypes."
 
