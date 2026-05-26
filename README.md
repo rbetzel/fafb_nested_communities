@@ -5,7 +5,7 @@ This repository contains code and data for generating the primary results from [
 
 ## To run analyses
 1. Download and unzip this repository.
-2. Navigate to this [zenodo repository](https://zenodo.org/records/20399924) and download the connectome data and the hierarchical community partition. Place these files in the `data/` directory.
+2. Navigate to this [zenodo repository](https://zenodo.org/records/20399924) and download the connectome data (`connectome_no_threshold.mat` and `drosophila_adult_no_threshold.npy`) and the hierarchical community partition (`final_partition_no_threshold.npy`). Place these files in the `data/` directory.
 3. Open MATLAB, navigate to the `m/` directory and execute `run_analyses.m`
 
 ## Pre-computed derivatives
