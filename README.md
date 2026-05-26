@@ -14,7 +14,7 @@ Note: that `m/run_analyses.m` performs analyses to generate Figures 2-8 (note th
 We also include code (`py/sample_posterior_distribution_no_threshold.ipynb`) for estimating communities based on the [graph-tool](https://graph-tool.skewed.de/) library. This procedure is computationally intense and will take a long time, owing to the size of the connectome. If the goal is to simply reproduce the results of the main text, we strongly suggest running `run_analyses.m` using the partition from the [Zenodo dataset](https://zenodo.org/records/20399924). If you end up running the community detection process, you will need to install the graph tool library: see [here for installation instructions](https://graph-tool.skewed.de/installation.html).
 
 ## References
-If you use data from this paper, please abide by FlyWire citation guidelines and cite the relevant [primary resources]{(https://codex.flywire.ai/about_flywire). Additionally, please cite our paper:
+If you use data from this paper, please abide by FlyWire citation guidelines and cite the relevant [primary resources](https://codex.flywire.ai/about_flywire). Additionally, please cite our paper:
 
 Betzel, R., Del Rio, O., Labora, N., Dvali, S., Larsen, B., Lynn, C. W., ... & Seguin, C. (2025). [Hierarchical Community Structure of the Adult Drosophila Connectome Reveals Conserved Circuit Archetypes](https://www.biorxiv.org/content/10.64898/2025.12.10.689094v1.abstract). bioRxiv, 2025-12.
 
